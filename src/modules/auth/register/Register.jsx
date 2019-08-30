@@ -2,20 +2,16 @@ import React from 'react';
 import AiesecImg from '../../../assets/images/aiesec.png';
 import './style.scss';
 import { connect } from 'react-redux';
-import { changeEmail, changePassword, login } from './state/actions';
 import { Button, TextField } from '@material-ui/core';
-
-const Login = props => {
-  const onSubmit = () => {
-    const user = {
-      username: props.email,
-      password: props.password
-    };
-    props.login(user);
+import { register, changeUsername } from './state/actions';
+const Register = props => {
+  const handleClick = () => {
+    props.register(props.userName);
+    props.history.push('/login');
   };
 
   return (
-    <div className='login'>
+    <div className='register'>
       <div className='container'>
         <div className='base-container'>
           <div className='header' />
@@ -23,35 +19,24 @@ const Login = props => {
             <div className='image'>
               <img src={AiesecImg} alt='logo' />
             </div>
-            <label className='headLabel'>Login</label>
+            <label className='headLabel'>Register</label>
             <div className='form'>
               <div className='form-group'>
                 <TextField
-                  id='outlined-email-input'
                   label='Email'
                   type='email'
                   name='email'
                   autoComplete='email'
                   margin='normal'
                   variant='outlined'
-                  onChange={props.changeEmail}
-                />
-              </div>
-              <div className='form-group'>
-                <TextField
-                  id='outlined-password-input'
-                  label='Password'
-                  type='password'
-                  margin='normal'
-                  variant='outlined'
-                  onChange={props.changePassword}
+                  onChange={props.changeUsername}
                 />
               </div>
             </div>
           </div>
           <div className='footer'>
-            <Button variant='contained' color='primary' onClick={onSubmit}>
-              LOGIN
+            <Button variant='contained' color='primary' onClick={handleClick}>
+              REGISTER
             </Button>
           </div>
         </div>
@@ -59,23 +44,19 @@ const Login = props => {
     </div>
   );
 };
-
 const mapStateToProps = state => {
   return {
-    email: state.loginOnChange.email,
-    password: state.loginOnChange.password
+    userName: state.register.userName
   };
 };
-
 const mapDispatchToProps = dispatch => {
   return {
-    changeEmail: event => dispatch(changeEmail(event.target.value)),
-    changePassword: event => dispatch(changePassword(event.target.value)),
-    login: user => dispatch(login(user))
+    changeUsername: event => dispatch(changeUsername(event.target.value)),
+    register: userName => dispatch(register(userName))
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(Register);
