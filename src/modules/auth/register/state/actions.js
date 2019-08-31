@@ -1,17 +1,5 @@
-import {
-  CHANGE_USERNAME,
-  REGISTER_FAILURE,
-  REGISTER_PENDING,
-  REGISTER_SUCCESS
-} from './types';
+import { REGISTER_FAILURE, REGISTER_PENDING, REGISTER_SUCCESS } from './types';
 import axios from 'axios';
-
-export const changeUsername = userName => {
-  return {
-    type: CHANGE_USERNAME,
-    userName
-  };
-};
 export const register = userName => {
   return dispatch => {
     dispatch(registerPending());

@@ -1,26 +1,6 @@
-import {
-  CHANGE_EMAIL,
-  CHANGE_PASSWORD,
-  LOGIN_FAILURE,
-  LOGIN_PENDING,
-  LOGIN_SUCCESS
-} from './types';
+import { LOGIN_FAILURE, LOGIN_PENDING, LOGIN_SUCCESS } from './types';
 
 import axios from 'axios';
-
-export const changeEmail = email => {
-  return {
-    type: CHANGE_EMAIL,
-    email
-  };
-};
-
-export const changePassword = password => {
-  return {
-    type: CHANGE_PASSWORD,
-    password
-  };
-};
 
 export const login = user => {
   return dispatch => {

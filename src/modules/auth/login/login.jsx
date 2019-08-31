@@ -1,19 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AiesecImg from '../../../assets/images/aiesec.png';
 import './style.scss';
 import { connect } from 'react-redux';
-import { changeEmail, changePassword, login } from './state/actions';
+import { login } from './state/actions';
 import { Button, TextField } from '@material-ui/core';
 
 const Login = props => {
+  const [user, setUser] = useState({ email: '', password: '' });
   const onSubmit = () => {
-    const user = {
-      username: props.email,
-      password: props.password
-    };
     props.login(user);
   };
-
+  const handleChange = event => {
+    setUser({ ...user, [event.target.name]: event.target.value });
+  };
   return (
     <div className='login'>
       <div className='container'>
@@ -34,17 +33,18 @@ const Login = props => {
                   autoComplete='email'
                   margin='normal'
                   variant='outlined'
-                  onChange={props.changeEmail}
+                  onChange={handleChange}
                 />
               </div>
               <div className='form-group'>
                 <TextField
                   id='outlined-password-input'
+                  name='password'
                   label='Password'
                   type='password'
                   margin='normal'
                   variant='outlined'
-                  onChange={props.changePassword}
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -59,23 +59,12 @@ const Login = props => {
     </div>
   );
 };
-
-const mapStateToProps = state => {
-  return {
-    email: state.loginOnChange.email,
-    password: state.loginOnChange.password
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
-    changeEmail: event => dispatch(changeEmail(event.target.value)),
-    changePassword: event => dispatch(changePassword(event.target.value)),
     login: user => dispatch(login(user))
   };
 };
-
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Login);
