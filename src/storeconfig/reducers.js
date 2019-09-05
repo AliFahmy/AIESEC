@@ -1,4 +1,3 @@
-import { registerReducers } from '../modules/auth/register/state/reducers';
-import { loginReducers } from '../modules/auth/login/state/reducer';
+import { loginReducers } from '../modules/auth/Home/state/reducer';
 
-export const reducers = { ...registerReducers, ...loginReducers };
+export const reducers = { ...loginReducers };

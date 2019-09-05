@@ -6,7 +6,7 @@ export const login = user => {
   return dispatch => {
     dispatch(loginPending);
     axios
-      .post('https://aiesec-asu-im-api.herokuapp.com/api/account/Token', user)
+      .post('https://aiesec-asu-im-api.herokuapp.com/api/Account/Token', user)
       .then(response => {
         dispatch(loginSuccess(response.data));
       })
@@ -23,8 +23,6 @@ const loginPending = () => {
 };
 
 const loginSuccess = data => {
-  console.log(data);
-
   return {
     type: LOGIN_SUCCESS,
     data

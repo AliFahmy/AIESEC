@@ -4,10 +4,12 @@ export const register = userName => {
   return dispatch => {
     dispatch(registerPending());
     axios
-      .post('https://aiesec-asu-im-api.herokuapp.com/api/Account/Register', {
-        username: userName,
-        password: '12345678'
-      })
+      .post(
+        'https://aiesec-asu-im-api.herokuapp.com/api/Account/PartialRegister',
+        {
+          email: userName
+        }
+      )
       .then(response => {
         dispatch(registerSuccess(response.data));
       })
